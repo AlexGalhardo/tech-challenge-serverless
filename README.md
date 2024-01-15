@@ -1,7 +1,5 @@
 # Tech Challenge Serverless
 
-## Demo
-
 https://github.com/AlexGalhardo/tech-challenge-stone/assets/19540357/e15dd4cc-d0a5-4197-8588-1835719f69ab
 
 ## DNS Production: https://eluwv4q4ag.execute-api.us-east-1.amazonaws.com
