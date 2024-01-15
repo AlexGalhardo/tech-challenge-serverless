@@ -1,0 +1,110 @@
+org: galhardoalex
+app: tech-challenge-stone
+service: tech-challenge-stone
+frameworkVersion: "3"
+
+plugins:
+  - serverless-plugin-typescript
+
+custom:
+  UsersTableName: 'users-table-${sls:stage}'
+  SiteAccessTableName: 'site-access-table-${sls:stage}'
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  stage: dev
+  region: us-east-1
+  environment:
+    USERS_TABLE: ${self:custom.UsersTableName}
+    SITE_ACCESS_TABLE: ${self:custom.SiteAccessTableName}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            # - dynamodb:UpdateItem
+            # - dynamodb:DeleteItem
+          Resource:
+            - Fn::GetAtt: [ UsersTable, Arn ]
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            # - dynamodb:DeleteItem
+          Resource:
+            - Fn::GetAtt: [ SiteAccessTable, Arn ]
+
+functions:
+  createUser:
+    handler: src/functions.createUser
+    events:
+      - httpApi:
+          path: /user
+          method: post
+  getUserById:
+    handler: src/functions.getUserById
+    events:
+      - httpApi:
+          path: /user/{id}
+          method: get
+  incrementSiteAccess:
+    handler: src/functions.incrementSiteAccess
+    events:
+      - httpApi:
+          path: /increment/site-access
+          method: post
+  getTotalSiteAccess:
+    handler: src/functions.getTotalSiteAccess
+    events:
+      - httpApi:
+          path: /total/site-access
+          method: get
+
+resources:
+  Resources:
+    UsersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.UsersTableName}
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+          - AttributeName: email
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+        - IndexName: EmailIndex
+          KeySchema:
+            - AttributeName: email
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1
+    SiteAccessTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.SiteAccessTableName}
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH

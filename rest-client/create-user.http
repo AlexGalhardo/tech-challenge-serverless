@@ -1,0 +1,8 @@
+POST https://eluwv4q4ag.execute-api.us-east-1.amazonaws.com/user HTTP/1.1
+content-type: application/json
+
+{
+	"name": "test vieira",
+	"email": "test.vieira@gmail.com",
+	"password": "qwe123BR@123qwe123"
+}
