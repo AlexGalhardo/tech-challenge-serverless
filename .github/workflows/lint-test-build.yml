@@ -1,11 +1,14 @@
+name: Lint, Tests and Build
+
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
   pull_request:
     types: [opened, synchronize]
-
-name: Lint, Tests and Build
+    branches:
+      - main
 
 jobs:
   test:
