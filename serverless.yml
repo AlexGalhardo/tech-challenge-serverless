@@ -1,6 +1,6 @@
 org: alexgalhardo
-app: tech-challenge-stone-sdx
-service: tech-challenge-stone-sdx
+app: tech-challenge-serverless
+service: tech-challenge-serverless
 frameworkVersion: "3"
 
 plugins:
@@ -9,9 +9,9 @@ plugins:
   - serverless-offline-local-authorizers-plugin
 
 custom:
-  DynamoUsersTableName: 'users-tech-challenge-stone-${sls:stage}'
-  DynamoRateLimitTableName: 'rate-limit-tech-challenge-stone-${sls:stage}'
-  DynamoEventsTableName: 'events-tech-challenge-stone-${sls:stage}'
+  DynamoUsersTableName: 'users-tech-challenge-serverless-${sls:stage}'
+  DynamoRateLimitTableName: 'rate-limit-tech-challenge-serverless-${sls:stage}'
+  DynamoEventsTableName: 'events-tech-challenge-serverless-${sls:stage}'
 
   esbuild:
     exclude: []
@@ -29,7 +29,7 @@ provider:
   region: us-east-1
   environment:
     WORKSPACE: sdx
-    DYNAMO_TABLE_RATE_LIMIT: 'rate-limit-tech-challenge-stone-sdx'
+    DYNAMO_TABLE_RATE_LIMIT: 'rate-limit-tech-challenge-serverless-sdx'
   iam:
     role:
       statements:

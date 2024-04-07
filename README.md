@@ -27,7 +27,7 @@ cd refactor-tech-challenge-stone/
 
 3. Install dependencies
 ```bash
-npm install
+bun install
 ```
 
 4. Login to your Serverless Account
