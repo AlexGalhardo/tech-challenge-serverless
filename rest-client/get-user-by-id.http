@@ -1,1 +1,28 @@
-GET https://eluwv4q4ag.execute-api.us-east-1.amazonaws.com/user/ff045ffe-cf1c-4b93-8ea5-8551ada215fe HTTP/1.1
+GET https://h46yq83ui9.execute-api.us-east-1.amazonaws.com/sdx/users/61f91465-8cb3-4d9e-9ad9-af3003a2796d HTTP/1.1
+
+# RESPONSE EXAMPLE
+
+# HTTP/1.1 200 OK
+# Content-Type: application/json
+# Content-Length: 273
+# Connection: close
+# Date: Fri, 22 Mar 2024 18:44:13 GMT
+# x-amzn-RequestId: 19f7d947-0e28-4db6-b643-2624708a4a86
+# Access-Control-Allow-Origin: *
+# Access-Control-Allow-Headers: Content-Type,X-Amz-Date,Authorization,X-Api-Key,x-requested-with
+# x-amz-apigw-id: VC2rZE0woAMEnfg=
+# Access-Control-Allow-Methods: POST,GET,OPTIONS,PUT,PATCH
+# X-Requested-With: *
+# X-Amzn-Trace-Id: Root=1-65fdd17b-5981960946f961763fa6b1c9;Parent=13c949d342a8b8ea;Sampled=0;lineage=9fbf6e8f:0
+# X-Cache: Miss from cloudfront
+# Via: 1.1 a5e2274d6c0c20116a20c8c2c58353d6.cloudfront.net (CloudFront)
+# X-Amz-Cf-Pop: GRU1-C2
+# X-Amz-Cf-Id: LFLZ6spdHwo_xSbBY6jS4HFrDULdlFwj61xFv57XTR0LCzH-P3vuCA==
+
+# {
+#   "id": "61f91465-8cb3-4d9e-9ad9-af3003a2796d",
+#   "name": "test alex galhardo",
+#   "email": "test.alex.galhardo@gmail.com",
+#   "updated_at": "2024-03-25T11:59:13.419Z",
+#   "created_at": "2024-03-25T11:59:13.419Z"
+# }

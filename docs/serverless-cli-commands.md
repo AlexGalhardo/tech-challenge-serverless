@@ -35,3 +35,8 @@ sls invoke
 sls --help
 ```
 
+- Set SLS AWS Credentials
+```
+sls config credentials -o --provider aws --key AWS_ACCESS_KEY --secret AWS_SECRET_ACCESS_KEY
+```
+

@@ -1,0 +1,44 @@
+POST https://h46yq83ui9.execute-api.us-east-1.amazonaws.com/sdx/users HTTP/1.1
+content-type: application/json
+
+{
+	"name": "test alex galhardo",
+	"email": "test.alex.galhardo@gmail.com",
+	"password": ""
+}
+
+# RESPONSE EXAMPLE
+
+# HTTP/1.1 200 OK
+# Content-Type: application/json
+# Content-Length: 367
+# Connection: close
+# Date: Fri, 22 Mar 2024 18:43:32 GMT
+# x-amzn-RequestId: e88b7533-1880-4b4e-8c45-a272afb29b3d
+# Access-Control-Allow-Origin: *
+# Access-Control-Allow-Headers: Content-Type,X-Amz-Date,Authorization,X-Api-Key,x-requested-with
+# x-amz-apigw-id: VC2k1GIFIAMEQwQ=
+# Access-Control-Allow-Methods: POST,GET,OPTIONS,PUT,PATCH
+# X-Requested-With: *
+# X-Amzn-Trace-Id: Root=1-65fdd151-5872490032d7cd0026d95dfd;Parent=300c46a8565ddf56;Sampled=0;lineage=138465d4:0
+# X-Cache: Miss from cloudfront
+# Via: 1.1 8925b71bb3654008054231e03eaa658c.cloudfront.net (CloudFront)
+# X-Amz-Cf-Pop: GRU1-C2
+# X-Amz-Cf-Id: DTkDoSZI3h7zq1PNvOs4nNYoaXaWr3tejQP-YGbiwcxizplbJwv6Zw==
+
+# {
+#   "key": {
+#     "id": "8ecc0af7-9077-495c-afe4-c1ca76c8be0a"
+#   },
+#   "body": {
+#     "name": "test alex galhardo",
+#     "email": "test.alex.galhardo@gmail.com",
+#     "password": "$2a$12$yErC4aIIJ/JBbAVj8b9oYOcdcx2GNDhIwpXuBbejQc92zP2kAvaPS"
+#   },
+#   "metadata": {
+#     "action": "user.created",
+#     "request_id": "e88b7533-1880-4b4e-8c45-a272afb29b3d",
+#     "ip": "e88b7533-1880-4b4e-8c45-a272afb29b3d",
+#     "user_agent": "vscode-restclient"
+#   }
+# }

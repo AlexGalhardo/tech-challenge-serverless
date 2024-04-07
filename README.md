@@ -1,9 +1,5 @@
 # Tech Challenge Serverless
 
-https://github.com/AlexGalhardo/tech-challenge-serverless/assets/19540357/2d15e1fa-c025-447a-b101-ae284354e799
-
-## DNS Production: https://eluwv4q4ag.execute-api.us-east-1.amazonaws.com
-
 ## Technologies
 - [NodeJS v20](https://nodejs.org)
 - [NPM](https://www.npmjs.com/)
@@ -14,19 +10,19 @@ https://github.com/AlexGalhardo/tech-challenge-serverless/assets/19540357/2d15e1
    - [DynamoDB](https://aws.amazon.com/dynamodb/)
    - [API Gateway](https://aws.amazon.com/api-gateway/)
 
-## Settings needed to run this project
+## Local Settings to run this project
 - See documentation: [docs/settings-to-run-this-project](./docs/settings-to-run-this-project.md)
 
 ## Setup
 
 1. Clone this repository
 ```bash
-git clone git@github.com:AlexGalhardo/tech-challenge-serverless.git
+git clone https://github.com/AlexGalhardo/refactor-tech-challenge-stone.git
 ```
 
 2. Enter repository
 ```bash
-cd tech-challenge-serverless/
+cd refactor-tech-challenge-stone/
 ```
 
 3. Install dependencies
@@ -39,37 +35,22 @@ npm install
 sls login
 ```
 
-5.  Deploy to AWS
+5. In https://app.serverless.com/your_user_name/settings/providers
+   - a. Create your AWS Provider to use Access Role ARN
+
+6. In https://app.serverless.com/your_user_name/apps
+   - a. Click on "Create App"
+   - b. Give your app name
+   - c. Created your app, click on "crete service" and give your service name
+   - d. Paste the org, app and service name into serverless.yml
+
+7.  Deploy to AWS
 ```bash
 sls deploy
 ```
 
-6. See video demo above for other necessary steps
-
 ## API Documentation
 - You can use the HTTP Requests inside [rest-client/](./rest-client/) folder using the VSCode extension [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
-
-- ### Using cURL
-   - Create User
-	```bash
-	curl -X POST -H "Content-Type:application/json" https://eluwv4q4ag.execute-api.us-east-1.amazonaws.com/user --data '{
-		"name": "alex galhardo",
-		"email": "aleexgvieira@gmail.com",
-		"password": "qwe123BR@123qwe123"
-	}'
-	```
-   - Get User By Id
-   ```bash
-   curl https://eluwv4q4ag.execute-api.us-east-1.amazonaws.com/user/a9c2e30b-1508-4613-ac1e-74fe1afdcb11
-   ```
-   - Increment Site Access
-	```bash
-	curl -X POST -H "Content-Type:application/json" https://eluwv4q4ag.execute-api.us-east-1.amazonaws.com/increment/site-access
-	```
-   - Get Total Site Access
-   ```bash
-   curl https://eluwv4q4ag.execute-api.us-east-1.amazonaws.com/total/site-access
-   ```
 
 ## General Documentation
 - You can see and add important documentation about this code repository in the [docs/](./docs/) folder
@@ -78,4 +59,4 @@ sls deploy
 
 [MIT](http://opensource.org/licenses/MIT)
 
-Copyright (c) January 2024-present, [Alex Galhardo](https://github.com/AlexGalhardo)
+Copyright (c) March 2024-present, [Alex Galhardo](https://github.com/AlexGalhardo)

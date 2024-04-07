@@ -1,0 +1,25 @@
+GET https://388qtj4ejc.execute-api.us-east-1.amazonaws.com/sdx/rate-limit/837564e7-469d-41af-a183-f5cb17f1a786 HTTP/1.1
+
+# RESPONSE EXAMPLE
+
+# HTTP/1.1 200 OK
+# Content-Type: application/json
+# Content-Length: 28
+# Connection: close
+# Date: Fri, 22 Mar 2024 18:50:36 GMT
+# x-amzn-RequestId: 3aa26945-e004-4f59-98ca-f6fcd1458bb4
+# Access-Control-Allow-Origin: *
+# Access-Control-Allow-Headers: Content-Type,X-Amz-Date,Authorization,X-Api-Key,x-requested-with
+# x-amz-apigw-id: VC3nMF4sIAMEqVg=
+# Access-Control-Allow-Methods: POST,GET,OPTIONS,PUT,PATCH
+# X-Requested-With: *
+# X-Amzn-Trace-Id: Root=1-65fdd2fa-50db89056269ccb879c000c3;Parent=601501e707e2478e;Sampled=0;lineage=47e4ec99:0
+# X-Cache: Miss from cloudfront
+# Via: 1.1 0bc3c1d1d52ecd02b40630685533a354.cloudfront.net (CloudFront)
+# X-Amz-Cf-Pop: GRU1-C2
+# X-Amz-Cf-Id: W5l2hUUrdzyMHCZDpV9-pZbzzBXpYlCpEm-aw-hiH0rtyJtjDlxyNA==
+
+# {
+#   "id": "837564e7-469d-41af-a183-f5cb17f1a786",
+#   "counter": 4
+# }

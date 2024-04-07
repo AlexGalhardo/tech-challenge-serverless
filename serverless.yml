@@ -1,23 +1,35 @@
-org: galhardoalex
-app: tech-challenge-stone
-service: tech-challenge-stone
+org: alexgalhardo
+app: tech-challenge-stone-sdx
+service: tech-challenge-stone-sdx
 frameworkVersion: "3"
 
 plugins:
-  - serverless-plugin-typescript
+  - serverless-esbuild
+  - serverless-offline
+  - serverless-offline-local-authorizers-plugin
 
 custom:
-  UsersTableName: 'users-table-${sls:stage}'
-  SiteAccessTableName: 'site-access-table-${sls:stage}'
+  DynamoUsersTableName: 'users-tech-challenge-stone-${sls:stage}'
+  DynamoRateLimitTableName: 'rate-limit-tech-challenge-stone-${sls:stage}'
+  DynamoEventsTableName: 'events-tech-challenge-stone-${sls:stage}'
+
+  esbuild:
+    exclude: []
+    sourcemap: true
+    watch:
+      pattern: "src/**/*"
+
+  serverless-offline:
+    noPrependStageInUrl: true
 
 provider:
   name: aws
   runtime: nodejs20.x
-  stage: dev
+  stage: sdx
   region: us-east-1
   environment:
-    USERS_TABLE: ${self:custom.UsersTableName}
-    SITE_ACCESS_TABLE: ${self:custom.SiteAccessTableName}
+    WORKSPACE: sdx
+    DYNAMO_TABLE_RATE_LIMIT: 'rate-limit-tech-challenge-stone-sdx'
   iam:
     role:
       statements:
@@ -38,42 +50,56 @@ provider:
             - dynamodb:GetItem
             - dynamodb:PutItem
             - dynamodb:UpdateItem
+            - dynamodb:BatchGetItem
             # - dynamodb:DeleteItem
           Resource:
-            - Fn::GetAtt: [ SiteAccessTable, Arn ]
+            - Fn::GetAtt: [ RateLimitTable, Arn ]
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            # - dynamodb:UpdateItem
+            # - dynamodb:DeleteItem
+          Resource:
+            - Fn::GetAtt: [ EventsTable, Arn ]
 
 functions:
-  createUser:
-    handler: src/functions.createUser
+  user-post:
+    handler: src/controllers/user/post/index.handler
     events:
-      - httpApi:
-          path: /user
+      - http:
           method: post
-  getUserById:
-    handler: src/functions.getUserById
+          path: /users
+
+  user-get:
+    handler: src/controllers/user/get/index.handler
     events:
-      - httpApi:
-          path: /user/{id}
+      - http:
           method: get
-  incrementSiteAccess:
-    handler: src/functions.incrementSiteAccess
+          path: /users/{id}
+
+  rate-limit-post:
+    handler: src/controllers/rate-limit/post/index.handler
     events:
-      - httpApi:
-          path: /increment/site-access
+      - http:
           method: post
-  getTotalSiteAccess:
-    handler: src/functions.getTotalSiteAccess
+          path: /rate-limit/{id}
+
+  rate-limit-get:
+    handler: src/controllers/rate-limit/get/index.handler
     events:
-      - httpApi:
-          path: /total/site-access
+      - http:
           method: get
+          path: /rate-limit/{id}
 
 resources:
   Resources:
     UsersTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: ${self:custom.UsersTableName}
+        TableName: ${self:custom.DynamoUsersTableName}
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
@@ -95,10 +121,11 @@ resources:
           ProvisionedThroughput:
             ReadCapacityUnits: 1
             WriteCapacityUnits: 1
-    SiteAccessTable:
+
+    RateLimitTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: ${self:custom.SiteAccessTableName}
+        TableName: ${self:custom.DynamoRateLimitTableName}
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
@@ -107,4 +134,18 @@ resources:
             AttributeType: S
         KeySchema:
           - AttributeName: id
+            KeyType: HASH
+
+    EventsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.DynamoEventsTableName}
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        AttributeDefinitions:
+          - AttributeName: pk
+            AttributeType: S
+        KeySchema:
+          - AttributeName: pk
             KeyType: HASH

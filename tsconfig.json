@@ -1,24 +1,49 @@
 {
   "compilerOptions": {
-    "preserveConstEnums": true,
-    "strictNullChecks": true,
-    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
     "allowJs": true,
-    "target": "es2022",
-    "outDir": ".build",
-    "moduleResolution": "node",
-    "lib": [
-      "es2022"
-    ],
-    "rootDir": "./",
-    "strict": true,
+    "declaration": true,
+    "baseUrl": "./",
+    "esModuleInterop": true,
     "module": "commonjs",
-    "esModuleInterop": true
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "outDir": ".build",
+    "rootDir": "./",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es2020",
+    "paths": {
+      "~/models/*": [
+        "./src/models/*"
+      ],
+      "~/repositories/*": [
+        "./src/repositories/*"
+      ],
+      "~/services/*": [
+        "./src/services/*"
+      ],
+      "~/utils/*": [
+        "./src/utils/*"
+      ]
+    }
   },
   "include": [
-    "**/*"
+    "src"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "node_modules/**/*",
+    ".serverless/**/*",
+    ".webpack/**/*",
+    "_warmup/**/*",
+    ".vscode/**/*",
+    ".idea/**/*",
+    "dist/**/*",
+    "tests/**/*"
   ]
 }
