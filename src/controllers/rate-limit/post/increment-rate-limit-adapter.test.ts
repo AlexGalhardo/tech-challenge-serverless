@@ -1,29 +1,29 @@
-import { mock } from 'jest-mock-extended'
+import { mock } from "jest-mock-extended";
 
-import { RateLimitKey } from '~/models/rate-limit'
-import incrementRateLimitRepository from '~/repositories/rate-limit/increment'
+import { RateLimitKey } from "~/models/rate-limit";
+import incrementRateLimitRepository from "~/repositories/rate-limit/increment";
 
-import incrementRateLimitAdapter from './increment-rate-limit-adapter'
+import incrementRateLimitAdapter from "./increment-rate-limit-adapter";
 
-jest.mock('~/repositories/rate-limit/increment')
+jest.mock("~/repositories/rate-limit/increment");
 
-describe('Controllers - Post Rate Limit - Increment Rate Limit Adapter', () => {
-  const incrementRateLimitRepositoryMock = jest.mocked(incrementRateLimitRepository)
+describe("Controllers - Post Rate Limit - Increment Rate Limit Adapter", () => {
+    const incrementRateLimitRepositoryMock = jest.mocked(incrementRateLimitRepository);
 
-  beforeEach(() => {
-    jest.clearAllMocks()
-  })
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
 
-  it('should return rate limit id and counter', async () => {
-    // Arrange
-    const rateLimitKeyMock = mock<RateLimitKey>()
-    incrementRateLimitRepositoryMock.mockResolvedValue()
+    it("should return rate limit id and counter", async () => {
+        // Arrange
+        const rateLimitKeyMock = mock<RateLimitKey>();
+        incrementRateLimitRepositoryMock.mockResolvedValue();
 
-    // Act
-    await incrementRateLimitAdapter(rateLimitKeyMock)
+        // Act
+        await incrementRateLimitAdapter(rateLimitKeyMock);
 
-    // Assert
-    expect(incrementRateLimitRepositoryMock).toHaveBeenCalledTimes(1)
-    expect(incrementRateLimitRepositoryMock).toHaveBeenCalledWith([rateLimitKeyMock])
-  })
-})
+        // Assert
+        expect(incrementRateLimitRepositoryMock).toHaveBeenCalledTimes(1);
+        expect(incrementRateLimitRepositoryMock).toHaveBeenCalledWith([rateLimitKeyMock]);
+    });
+});

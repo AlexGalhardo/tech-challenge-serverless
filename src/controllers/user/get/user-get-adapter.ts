@@ -1,14 +1,14 @@
-import { NotFoundError } from '@stone-ton/lambda-handlers'
+import { NotFoundError } from "@stone-ton/lambda-handlers";
 
-import { User, UserKey } from '~/models/user'
-import getUser from '~/repositories/user/get'
+import { User, UserKey } from "~/models/user";
+import getUser from "~/repositories/user/get";
 
 const getUserAdapter = async (key: UserKey): Promise<User> => {
-  const user = await getUser(key)
+    const user = await getUser(key);
 
-  if (!user) throw new NotFoundError()
+    if (!user) throw new NotFoundError();
 
-  return user
-}
+    return user;
+};
 
-export default getUserAdapter
+export default getUserAdapter;

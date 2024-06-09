@@ -1,11 +1,11 @@
 const getStringEnv = (key: string): string => {
-  const value = process.env[key]
+    const value = process.env[key];
 
-  if (value === undefined) {
-    throw new Error(`${key} is not set`)
-  }
+    if (value === undefined) {
+        throw new Error(`${key} is not set`);
+    }
 
-  return value
-}
+    return value;
+};
 
-export default getStringEnv
+export default getStringEnv;

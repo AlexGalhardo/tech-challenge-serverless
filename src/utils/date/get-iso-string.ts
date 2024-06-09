@@ -1,3 +1,3 @@
-const getISOString = () => new Date().toISOString()
+const getISOString = () => new Date().toISOString();
 
-export default getISOString
+export default getISOString;

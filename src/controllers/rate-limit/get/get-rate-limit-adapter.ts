@@ -1,14 +1,14 @@
-import { NotFoundError } from '@stone-ton/lambda-handlers'
+import { NotFoundError } from "@stone-ton/lambda-handlers";
 
-import { RateLimit, RateLimitKey } from '~/models/rate-limit'
-import getRateLimitRepository from '~/repositories/rate-limit/batch-get'
+import { RateLimit, RateLimitKey } from "~/models/rate-limit";
+import getRateLimitRepository from "~/repositories/rate-limit/batch-get";
 
 const getRateLimitAdapter = async (key: RateLimitKey): Promise<RateLimit[]> => {
-  const rateLimit = await getRateLimitRepository([key])
+    const rateLimit = await getRateLimitRepository([key]);
 
-  if (!rateLimit) throw new NotFoundError()
+    if (!rateLimit) throw new NotFoundError();
 
-  return rateLimit
-}
+    return rateLimit;
+};
 
-export default getRateLimitAdapter
+export default getRateLimitAdapter;

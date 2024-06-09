@@ -1,8 +1,11 @@
 {
 	"name": "tech-challenge-serverless",
+	"engines": {
+		"node": ">= 20"
+	},
 	"scripts": {
-		"prepare": "npx husky install",
-		"start": "AWS_PROFILE=sm-sdx sls offline --noPrependStageInUrl",
+		"prepare": "husky install",
+		"dev": "AWS_PROFILE=sm-sdx sls offline --noPrependStageInUrl",
 		"debug": "export SLS_DEBUG=* AWS_PROFILE=sm-sdx LOGGER_LEVEL=TRACE && node --inspect ./node_modules/.bin/serverless offline --noPrependStageInUrl",
 		"test": "LOGGER_LEVEL=silent jest",
 		"test:watch": "LOGGER_LEVEL=silent jest --watch",
@@ -14,7 +17,8 @@
 		"prune": "npm prune --omit=dev",
 		"mv:node_modules": "mv node_modules dist/node_modules",
 		"zip": "cd dist && zip -r latest.zip ./",
-		"build": "run-s clean tsc tsc-alias prune mv:node_modules zip"
+		"build": "run-s clean tsc tsc-alias prune mv:node_modules zip",
+		"format": "prettier --write \"src/**/*.ts\""
 	},
 	"dependencies": {
 		"@stone-ton/aws-dynamodb-wrapper": "^3.481.4",
@@ -56,6 +60,8 @@
 		"typescript": "^5.4.3",
 		"npm-run-all": "^4.1.5",
 		"rimraf": "^4.4.0",
-		"tsc-alias": "^1.8.3"
+		"tsc-alias": "^1.8.3",
+		"husky": "^9.0.11",
+		"prettier": "^3.3.1"
 	}
 }
